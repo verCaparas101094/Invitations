@@ -9,7 +9,7 @@
   (click)="playIntro()"
   (keydown.enter)="playIntro()"
   (keydown.space)="playIntro(); $event.preventDefault()">
-  <video #introVideo class="intro-video" muted playsinline preload="auto"
+  <video #introVideo class="intro-video" muted playsinline preload="auto" poster="assets/opening-poster.jpg"
     (timeupdate)="trackIntroProgress($event)" (ended)="finishIntro()" (error)="skipIntro()"
     aria-label="Invitation opening video">
     <source src="assets/opening.mp4" type="video/mp4">
@@ -17,7 +17,6 @@
 </div>
 
 <main class="invitation"
-  [class.intro-waiting]="introStarted() && (introPhase() === 'playing' || introPhase() === 'white')"
   [class.site-ready]="introPhase() === 'reveal' || introPhase() === 'done'">
   <div class="main-section">
     <button class="music" type="button" aria-label="Toggle invitation music animation"
