@@ -3,11 +3,11 @@ html { scroll-behavior: smooth; }
 .intro-overlay {
   position: fixed;
   z-index: 10000;
-  top: 0;
+  top: 50%;
   left: 50%;
   width: min(100vw, 390px);
   aspect-ratio: 390 / 779;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
   overflow: hidden;
