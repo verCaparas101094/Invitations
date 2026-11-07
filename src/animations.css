@@ -116,10 +116,10 @@ html { scroll-behavior: smooth; }
   transform-origin: center;
 }
 
-.gallery-butterfly--one { top: 190px; left: -7px; width: 66px; }
-.gallery-butterfly--two { top: 370px; right: -8px; width: 61px; }
-.gallery-butterfly--three { top: 598px; left: -9px; width: 64px; }
-.gallery-butterfly--four { top: 778px; right: -5px; width: 58px; }
+.gallery-butterfly--one { top: 190px; left: 30px; width: 80px; }
+.gallery-butterfly--two { top: 370px; right: 30px; width: 80px; }
+.gallery-butterfly--three { top: 598px; left: 30px; width: 80px; }
+.gallery-butterfly--four { top: 778px; right: 30px; width: 80px; }
 
 .is-visible .section-butterfly {
   animation: corner-flutter 5.2s .4s ease-in-out infinite;

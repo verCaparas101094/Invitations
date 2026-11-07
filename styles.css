@@ -121,9 +121,10 @@ section {
 .months-subtitle { top: 153px; left: 87px; width: 216px; }
 
 .months-grid {
-    top: 157px;
-    left: 15px;
-    width: 372px;
+    top: 50px;
+    left: 70px;
+    width: 260px;
+    height: 1000px;
 }
 
 .godparents { height: 703px; }
