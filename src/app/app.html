@@ -1,0 +1,161 @@
+<div class="intro-overlay"
+  [class.is-white]="introPhase() === 'white'"
+  [class.is-revealing]="introPhase() === 'reveal'"
+  [class.is-hidden]="introPhase() === 'done'"
+  [class.is-started]="introStarted()"
+  [attr.role]="introStarted() ? null : 'button'"
+  [attr.tabindex]="introStarted() ? -1 : 0"
+  [attr.aria-label]="introStarted() ? null : 'Play the invitation opening video'"
+  (click)="playIntro()"
+  (keydown.enter)="playIntro()"
+  (keydown.space)="playIntro(); $event.preventDefault()">
+  <video #introVideo class="intro-video" muted playsinline preload="auto"
+    (timeupdate)="trackIntroProgress($event)" (ended)="finishIntro()" (error)="skipIntro()"
+    aria-label="Invitation opening video">
+    <source src="assets/opening.mp4" type="video/mp4">
+  </video>
+</div>
+
+<main class="invitation"
+  [class.intro-waiting]="introPhase() === 'playing' || introPhase() === 'white'"
+  [class.site-ready]="introPhase() === 'reveal' || introPhase() === 'done'">
+  <div class="main-section">
+    <button class="music" type="button" aria-label="Toggle invitation music animation"
+      [attr.aria-pressed]="musicOn" [class.is-playing]="musicOn" (click)="toggleMusic()">
+      <img src="assets/Frame 2576.svg" alt="">
+    </button>
+
+    <section class="hero decorated decorated--tall animate-section">
+      <img class="eyebrow" src="assets/JOIN US AS WE CELEBRATE OUR.svg" alt="Join us as we celebrate our">
+      <img class="little-butterfly" src="assets/Group 3019.svg" alt="Little Butterfly">
+      <img class="hero-butterfly hero-butterfly--purple" src="assets/image-Photoroom (100) 1.svg" alt="">
+      <img class="hero-butterfly hero-butterfly--pink" src="assets/image-Photoroom (99) 1.svg" alt="">
+      <img class="hero-photo" src="assets/Group 3021.svg" alt="Lara Shearra"
+        style="mask-image: linear-gradient(to bottom, black 70%, transparent 100%);">
+      <img class="hero-name" src="assets/Group 3023.svg" alt="Lara Shearra">
+      <img class="event-ribbon" src="assets/image-Photoroom (31) 1.svg" alt="Baptism and first birthday">
+      <img class="event-date" src="assets/SUNDAY 23rd of august 2026 at 10_00 am.svg"
+        alt="Sunday, 23rd of August 2026 at 10:00 AM">
+      <a class="asset-button hero-rsvp" href="#rsvp"><img src="assets/Frame 2578.svg" alt="RSVP now"></a>
+      <img class="rsvp-date" src="assets/RSVP by august 2, 2026.svg" alt="RSVP by August 2, 2026">
+    </section>
+
+    <section class="months decorated decorated--tall animate-section">
+      <img class="section-bow" src="assets/Group 3016.svg" alt="">
+      <img class="months-title" src="assets/A Year of Little Wonders.svg" alt="A year of little wonders">
+      <img class="months-subtitle" src="assets/12 Months of Growing Up.svg" alt="12 months of growing up">
+      <img class="months-grid" src="assets/Group 3027.svg" alt="Lara from one to twelve months">
+    </section>
+
+    <section class="godparents decorated decorated--tall animate-section">
+      <img class="section-bow" src="assets/Group 3016.svg" alt="">
+      <img class="godparents-title" src="assets/Godparents.svg" alt="Godparents">
+      <img class="godparents-subtitle" src="assets/The Hearts Who Will Guide me Along the Way.svg"
+        alt="The hearts who will guide me along the way">
+      <div class="names" aria-label="Godparents">
+        <strong>AETHAN NACIONALES</strong>
+        <strong>LOUIS FERRER</strong>
+        <strong>KARL LESTER OSCAN</strong>
+        <strong>LYNYRD ANTIPUESTO CORONEL</strong>
+        <strong>MARK JORIEL FERNANDEZ</strong>
+        <strong>GERALD QUEYQUEP</strong>
+        <span class="names-gap"></span>
+        <span class="names-gap"></span>
+        <strong>RIO DE GUZMAN</strong>
+        <strong>ERLY NACIONALES</strong>
+        <strong>SYDNEY MAMARIL</strong>
+        <strong>ARMIE CARDOZO</strong>
+        <strong>NOREINE VENICE PASAOA</strong>
+        <strong>FATIMA GRACE FRANDO</strong>
+        <strong>KRISTINE AVELINO</strong>
+        <strong>JOANA MARIE DELEON</strong>
+        <strong>AMBRA THALIA ANDAYA</strong>
+      </div>
+    </section>
+
+    <section id="event-schedule" class="schedule decorated decorated--tall animate-section">
+      <img class="section-bow" src="assets/Group 3016.svg" alt="">
+      <img class="schedule-title" src="assets/Date &amp; Time.svg" alt="Date and time">
+      <img class="schedule-subtitle" src="assets/A Little Day, A Big Celebration Save the Date!.svg"
+        alt="A little day, a big celebration — save the date">
+      <div class="white-card date-card"><img src="assets/Frame 2579.svg"
+          alt="Sunday, 23rd of August 2026 at 10:00 AM"></div>
+
+      <div class="schedule-group church-group">
+        <img class="church-title" src="assets/Church.svg" alt="Church">
+        <img class="church-subtitle" src="assets/A Place of Faith and Blessings.svg"
+          alt="A place of faith and blessings">
+        <div class="white-card church-card"><img src="assets/Frame 2580.svg"
+            alt="St. Michael the Archangel Parish Church, Calasiao, Pangasinan"></div>
+        <a class="asset-button church-map" href="#"><img src="assets/Frame 2581.svg" alt="Church map"></a>
+      </div>
+
+      <div class="schedule-group reception-group">
+        <img class="reception-title" src="assets/Reception.svg" alt="Reception">
+        <img class="reception-subtitle" src="assets/The Celebration Awaits.svg" alt="The celebration awaits">
+        <div class="white-card reception-card"><img src="assets/Frame 2582.svg"
+            alt="Jech's Bakeshop and Restaurant, Calasiao, Pangasinan"></div>
+        <a class="asset-button reception-map" href="#"><img src="assets/Frame 2583.svg" alt="Reception map"></a>
+      </div>
+    </section>
+
+    <section class="dresscode decorated decorated--tall animate-section">
+      <img class="section-bow" src="assets/Group 3033.svg" alt="">
+      <img class="dresscode-title" src="assets/Dresscode.svg" alt="Dresscode">
+      <div class="swatches" aria-label="Suggested colors">
+        <img src="assets/Ellipse 440.svg" alt="Light cream">
+        <img src="assets/Ellipse 441.svg" alt="Blush pink">
+        <img src="assets/Ellipse 442.svg" alt="Warm beige">
+      </div>
+      <div class="celebration-group">
+        <img class="dresscode-note" src="assets/We kindly ask you to consider wearing light colors..svg"
+          alt="We kindly ask you to consider wearing light colors">
+        <img class="baby" src="assets/transparent-Photoroom (11) 2.svg" alt="Lara">
+        <img class="cant-wait" src="assets/Can’t wait to celebrate with you po!.svg"
+          alt="Can't wait to celebrate with you po!">
+        <img class="countdown" src="assets/Frame 2584.svg" alt="104 days, 10 hours, 45 minutes, 12 seconds">
+        <div class="gift-note white-card"><img src="assets/Frame 2596.svg"
+            alt="Your presence and prayers are all that we request"></div>
+      </div>
+    </section>
+
+    <section class="rsvp decorated decorated--tall animate-section" id="rsvp">
+      <div class="rsvp-content">
+        <div class="rsvp-heading">
+          <img src="assets/Group 3035.svg" alt="RSVP — Please RSVP by August 2, 2026">
+        </div>
+
+        <form class="rsvp-form" #rsvpForm="ngForm" (ngSubmit)="submitRsvp(rsvpForm)">
+          <label class="rsvp-field">
+            <span>Your name*</span>
+            <input type="text" name="name" autocomplete="name" ngModel required>
+          </label>
+
+          <fieldset class="attendance-field">
+            <legend>Are you coming?*</legend>
+            <label class="attendance-choice">
+              <input type="radio" name="attendance" value="yes" ngModel required>
+              <span>Yes, I’ll be there!</span>
+            </label>
+            <label class="attendance-choice">
+              <input type="radio" name="attendance" value="no" ngModel>
+              <span>Can’t make it this time.</span>
+            </label>
+          </fieldset>
+
+          <label class="rsvp-field">
+            <span>Mobile number*</span>
+            <input type="tel" name="mobile" autocomplete="tel" inputmode="tel" ngModel required>
+          </label>
+
+          <p class="rsvp-help">Please share your phone number so we can reach out with updates if needed.</p>
+          <button class="rsvp-submit" type="submit">{{ submitted ? 'Thank you!' : 'Submit' }}</button>
+        </form>
+      </div>
+      <a class="footer-panel" href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank"
+        rel="noopener noreferrer" aria-label="Visit Prints by K Designs on Instagram">
+        <img src="assets/Group 3034.svg" alt="Prints by K Designs — Visit our page">
+      </a>
+    </section>
+  </div>
+</main>

@@ -1,0 +1,232 @@
+html { scroll-behavior: smooth; }
+
+.intro-overlay {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 50%;
+  width: min(100vw, 390px);
+  aspect-ratio: 390 / 779;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .12);
+  opacity: 1;
+  cursor: pointer;
+  transition: background-color .65s ease, opacity .9s ease;
+}
+
+.intro-overlay.is-started { cursor: default; }
+
+.intro-overlay:not(.is-started):focus-visible {
+  outline: 3px solid #ed9eac;
+  outline-offset: -3px;
+}
+
+.intro-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: transparent;
+  opacity: .82;
+  transition: opacity .65s ease;
+}
+
+.intro-overlay.is-white {
+  background: #fff;
+}
+
+.intro-overlay.is-white .intro-video { opacity: 0; }
+
+.intro-overlay.is-revealing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-overlay.is-hidden { display: none; }
+
+.invitation {
+  transition: opacity .9s ease;
+}
+
+.invitation.intro-waiting { opacity: .42; }
+.invitation.site-ready { opacity: 1; }
+
+.animate-section {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity .8s ease, transform .95s cubic-bezier(.2, .8, .2, 1);
+}
+
+.animate-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero.is-visible .eyebrow,
+.hero.is-visible .little-butterfly {
+  animation: invitation-pop .8s cubic-bezier(.2, .9, .25, 1.25) both;
+}
+
+.hero.is-visible .little-butterfly { animation-delay: .14s; }
+.hero.is-visible .hero-photo { animation: photo-arrival 1s .24s cubic-bezier(.2, .85, .25, 1) both; }
+.hero.is-visible .hero-name { animation: name-arrival .85s .48s cubic-bezier(.15, .9, .25, 1.2) both; }
+.hero.is-visible .event-ribbon { animation: ribbon-arrival .75s .68s cubic-bezier(.2, .9, .3, 1.2) both; }
+.hero.is-visible .event-date,
+.hero.is-visible .hero-rsvp,
+.hero.is-visible .rsvp-date { animation: soft-rise .65s .8s ease both; }
+
+.hero.is-visible .hero-butterfly--purple {
+  animation: butterfly-purple 4.2s .6s ease-in-out infinite;
+  transform-origin: 60% 60%;
+}
+
+.hero.is-visible .hero-butterfly--pink {
+  animation: butterfly-pink 3.7s .35s ease-in-out infinite;
+  transform-origin: 45% 55%;
+}
+
+.music.is-playing img { animation: music-dance 1.1s ease-in-out infinite; }
+
+.months.is-visible .section-bow,
+.godparents.is-visible .section-bow,
+#event-schedule.is-visible .section-bow,
+.dresscode.is-visible .section-bow {
+  animation: bow-bob 3.5s .8s ease-in-out infinite;
+}
+
+.months.is-visible .months-title,
+.godparents.is-visible .godparents-title,
+#event-schedule.is-visible .schedule-title,
+.dresscode.is-visible .dresscode-title {
+  animation: invitation-pop .8s .12s cubic-bezier(.2, .9, .25, 1.2) both;
+}
+
+.months.is-visible .months-grid {
+  animation: gallery-arrival .9s .28s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.godparents.is-visible .names { animation: soft-rise .8s .28s ease both; }
+
+#event-schedule.is-visible .date-card { animation: card-float 4.8s .7s ease-in-out infinite; }
+#event-schedule.is-visible .church-group { animation: group-arrival-left .8s .2s ease both; }
+#event-schedule.is-visible .reception-group { animation: group-arrival-right .8s .32s ease both; }
+
+.dresscode.is-visible .swatches img { animation: color-bounce 2.8s ease-in-out infinite; }
+.dresscode.is-visible .swatches img:nth-child(2) { animation-delay: .22s; }
+.dresscode.is-visible .swatches img:nth-child(3) { animation-delay: .44s; }
+.dresscode.is-visible .baby { animation: baby-bob 3.8s .4s ease-in-out infinite; }
+.dresscode.is-visible .cant-wait { animation: soft-rise .8s .25s ease both; }
+.dresscode.is-visible .countdown { animation: invitation-pop .75s .42s cubic-bezier(.2, .9, .25, 1.15) both; }
+
+#rsvp.is-visible .rsvp-heading { animation: soft-rise .8s ease both; }
+#rsvp.is-visible .rsvp-form { animation: form-arrival .85s .18s cubic-bezier(.2, .85, .25, 1.08) both; }
+#rsvp.is-visible .footer-panel { animation: soft-rise .8s .38s ease both; }
+
+.asset-button img,
+.rsvp-submit {
+  transition: transform .2s ease, filter .2s ease, background-color .2s ease;
+}
+
+.asset-button:hover img { transform: scale(1.035) rotate(-.35deg); filter: saturate(1.08); }
+.rsvp-submit:hover { transform: translateY(-2px) scale(1.01); }
+
+@keyframes invitation-pop {
+  from { opacity: 0; transform: scale(.84); }
+  70% { opacity: 1; transform: scale(1.035); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes photo-arrival {
+  from { opacity: 0; transform: translateY(24px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes name-arrival {
+  from { opacity: 0; transform: translateY(12px) scale(.9) rotate(-1deg); }
+  72% { opacity: 1; transform: translateY(-2px) scale(1.025) rotate(.3deg); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+@keyframes ribbon-arrival {
+  from { opacity: 0; transform: translateX(-22px) rotate(-2deg); }
+  68% { opacity: 1; transform: translateX(3px) rotate(.5deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+
+@keyframes soft-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes butterfly-purple {
+  0%, 100% { transform: translate(0, 0) rotate(-2deg); }
+  35% { transform: translate(7px, -10px) rotate(5deg); }
+  68% { transform: translate(-3px, -5px) rotate(-5deg); }
+}
+
+@keyframes butterfly-pink {
+  0%, 100% { transform: translate(0, 0) rotate(2deg); }
+  40% { transform: translate(-8px, -9px) rotate(-5deg); }
+  72% { transform: translate(3px, -4px) rotate(6deg); }
+}
+
+@keyframes music-dance {
+  0%, 100% { transform: rotate(0) scale(1); }
+  30% { transform: rotate(-8deg) scale(1.08); }
+  65% { transform: rotate(8deg) scale(.98); }
+}
+
+@keyframes bow-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-5px) rotate(.8deg); }
+}
+
+@keyframes gallery-arrival {
+  from { opacity: 0; transform: translateY(22px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes group-arrival-left {
+  from { opacity: 0; transform: translateX(-22px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes group-arrival-right {
+  from { opacity: 0; transform: translateX(22px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes color-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.04); }
+}
+
+@keyframes baby-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-6px) rotate(.7deg); }
+}
+
+@keyframes form-arrival {
+  from { opacity: 0; transform: translateY(25px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-section,
+  .animate-section.is-visible,
+  .animate-section * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

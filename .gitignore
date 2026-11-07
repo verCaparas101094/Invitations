@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.angular/
+backup/
+.DS_Store
+npm-debug.log*
+angular-animation-preview.png
+hero-section-final.png
+rsvp-section-final.png
+schedule-section-final.png
+static-final-390.png
+video-intro-preview.png
