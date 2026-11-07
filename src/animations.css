@@ -30,9 +30,11 @@ html { scroll-behavior: smooth; }
   height: 100%;
   object-fit: cover;
   background: transparent;
-  opacity: .82;
+  opacity: 0;
   transition: opacity .65s ease;
 }
+
+.intro-overlay.is-started .intro-video { opacity: .82; }
 
 .intro-overlay.is-white {
   background: #fff;

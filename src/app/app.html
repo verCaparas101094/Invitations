@@ -17,7 +17,7 @@
 </div>
 
 <main class="invitation"
-  [class.intro-waiting]="introPhase() === 'playing' || introPhase() === 'white'"
+  [class.intro-waiting]="introStarted() && (introPhase() === 'playing' || introPhase() === 'white')"
   [class.site-ready]="introPhase() === 'reveal' || introPhase() === 'done'">
   <div class="main-section">
     <button class="music" type="button" aria-label="Toggle invitation music animation"
