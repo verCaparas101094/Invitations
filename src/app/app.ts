@@ -61,6 +61,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     video.muted = true;
     this.introStarted.set(true);
+    void this.prepareBaptismAudio();
     void video.play()
       .then(() => this.scheduleIntroFallback(video))
       .catch(() => {
@@ -98,6 +99,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.introTimers.push(
       setTimeout(() => {
         this.introPhase.set('reveal');
+        this.startMusicAfterOpening();
         this.startSectionAnimations();
       }, 650),
       setTimeout(() => {
@@ -112,6 +114,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
 
     this.introPhase.set('reveal');
+    if (this.introStarted()) {
+      this.startMusicAfterOpening();
+    }
     this.startSectionAnimations();
     this.introTimers.push(setTimeout(() => this.introPhase.set('done'), 700));
   }
@@ -154,6 +159,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private async startBaptismMusic(): Promise<void> {
+    await this.prepareBaptismAudio();
+    if (!this.musicOn || !this.audioContext) {
+      return;
+    }
+
+    this.playBaptismChimes();
+    this.musicTimer = setInterval(() => this.playBaptismChimes(), 7600);
+  }
+
+  private async prepareBaptismAudio(): Promise<void> {
     const AudioContextClass = window.AudioContext ??
       (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
 
@@ -164,12 +179,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     this.audioContext ??= new AudioContextClass();
     await this.audioContext.resume();
-    if (!this.musicOn) {
-      this.stopBaptismMusic();
+  }
+
+  private startMusicAfterOpening(): void {
+    if (this.musicOn) {
       return;
     }
-    this.playBaptismChimes();
-    this.musicTimer = setInterval(() => this.playBaptismChimes(), 7600);
+
+    this.musicOn = true;
+    void this.startBaptismMusic();
   }
 
   private playBaptismChimes(): void {
