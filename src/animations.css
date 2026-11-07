@@ -107,6 +107,20 @@ html { scroll-behavior: smooth; }
 .section-butterfly--dresscode { top: 92px; right: 14px; width: 38px; }
 .section-butterfly--rsvp { top: 72px; left: 10px; width: 36px; }
 
+.gallery-butterfly {
+  z-index: 3;
+  height: auto;
+  opacity: .82;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 4px rgba(117, 86, 105, .12));
+  transform-origin: center;
+}
+
+.gallery-butterfly--one { top: 190px; left: -7px; width: 66px; }
+.gallery-butterfly--two { top: 370px; right: -8px; width: 61px; }
+.gallery-butterfly--three { top: 598px; left: -9px; width: 64px; }
+.gallery-butterfly--four { top: 778px; right: -5px; width: 58px; }
+
 .is-visible .section-butterfly {
   animation: corner-flutter 5.2s .4s ease-in-out infinite;
 }
@@ -115,6 +129,18 @@ html { scroll-behavior: smooth; }
   animation-name: corner-flutter-reverse;
   animation-duration: 4.7s;
 }
+
+.months.is-visible .gallery-butterfly {
+  animation: corner-flutter 5.8s ease-in-out infinite;
+}
+
+.months.is-visible .gallery-butterfly--two,
+.months.is-visible .gallery-butterfly--four {
+  animation-name: corner-flutter-reverse;
+  animation-delay: .7s;
+}
+
+.months.is-visible .gallery-butterfly--three { animation-delay: 1.25s; }
 
 .months.is-visible .section-bow,
 .godparents.is-visible .section-bow,

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, signal } fr
 import { FormsModule, NgForm } from '@angular/forms';
 
 type IntroPhase = 'playing' | 'white' | 'reveal' | 'done';
+type CountdownValue = { days: string; hours: string; minutes: string; seconds: string };
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   submitted = false;
   readonly introStarted = signal(false);
   readonly introPhase = signal<IntroPhase>('playing');
+  readonly countdown = signal<CountdownValue>({ days: '00', hours: '00', minutes: '00', seconds: '00' });
   private observer?: IntersectionObserver;
   private sections: HTMLElement[] = [];
   private sectionAnimationsStarted = false;
   private readonly introTimers: Array<ReturnType<typeof setTimeout>> = [];
   private audioContext?: AudioContext;
   private musicTimer?: ReturnType<typeof setInterval>;
+  private countdownTimer?: ReturnType<typeof setInterval>;
 
   constructor(private readonly host: ElementRef<HTMLElement>) {}
 
@@ -30,6 +33,24 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       this.host.nativeElement.querySelectorAll<HTMLElement>('.animate-section')
     );
 
+    this.updateCountdown();
+    this.countdownTimer = setInterval(() => this.updateCountdown(), 1000);
+
+  }
+
+  private updateCountdown(): void {
+    const target = new Date('2027-02-14T10:00:00+08:00').getTime();
+    const remaining = Math.max(0, target - Date.now());
+    const day = 86_400_000;
+    const hour = 3_600_000;
+    const minute = 60_000;
+
+    this.countdown.set({
+      days: String(Math.floor(remaining / day)).padStart(2, '0'),
+      hours: String(Math.floor((remaining % day) / hour)).padStart(2, '0'),
+      minutes: String(Math.floor((remaining % hour) / minute)).padStart(2, '0'),
+      seconds: String(Math.floor((remaining % minute) / 1000)).padStart(2, '0')
+    });
   }
 
   playIntro(): void {
@@ -202,5 +223,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.observer?.disconnect();
     this.introTimers.forEach((timer) => clearTimeout(timer));
     this.stopBaptismMusic();
+    if (this.countdownTimer) {
+      clearInterval(this.countdownTimer);
+    }
   }
 }

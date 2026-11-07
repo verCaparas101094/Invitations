@@ -45,6 +45,10 @@
       <img class="months-title" src="assets/A Year of Little Wonders.svg" alt="A year of little wonders">
       <img class="months-subtitle" src="assets/12 Months of Growing Up.svg" alt="12 months of growing up">
       <img class="months-grid" src="assets/Group 3027.svg" alt="Lara from one to twelve months">
+      <img class="gallery-butterfly gallery-butterfly--one" src="assets/image-Photoroom (100) 1.svg" alt="">
+      <img class="gallery-butterfly gallery-butterfly--two" src="assets/image-Photoroom (99) 1.svg" alt="">
+      <img class="gallery-butterfly gallery-butterfly--three" src="assets/image-Photoroom (100) 1.svg" alt="">
+      <img class="gallery-butterfly gallery-butterfly--four" src="assets/image-Photoroom (99) 1.svg" alt="">
     </section>
 
     <section class="godparents decorated decorated--tall animate-section">
@@ -116,7 +120,12 @@
         <img class="baby" src="assets/transparent-Photoroom (11) 2.svg" alt="Lara">
         <img class="cant-wait" src="assets/Can’t wait to celebrate with you po!.svg"
           alt="Can't wait to celebrate with you po!">
-        <img class="countdown" src="assets/Frame 2584.svg" alt="104 days, 10 hours, 45 minutes, 12 seconds">
+        <div class="countdown" role="timer" aria-live="off" aria-label="Countdown to February 14, 2027">
+          <div class="countdown-unit"><strong>{{ countdown().days }}</strong><span>Days</span></div>
+          <div class="countdown-unit"><strong>{{ countdown().hours }}</strong><span>Hours</span></div>
+          <div class="countdown-unit"><strong>{{ countdown().minutes }}</strong><span>Mins.</span></div>
+          <div class="countdown-unit"><strong>{{ countdown().seconds }}</strong><span>Secs.</span></div>
+        </div>
         <div class="gift-note white-card"><img src="assets/Frame 2596.svg"
             alt="Your presence and prayers are all that we request"></div>
       </div>
