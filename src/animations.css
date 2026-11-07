@@ -91,6 +91,31 @@ html { scroll-behavior: smooth; }
 
 .music.is-playing img { animation: music-dance 1.1s ease-in-out infinite; }
 
+.section-butterfly {
+  z-index: 3;
+  width: 42px;
+  height: auto;
+  opacity: .76;
+  pointer-events: none;
+  transform-origin: center;
+  filter: drop-shadow(0 3px 4px rgba(117, 86, 105, .12));
+}
+
+.section-butterfly--months { top: 82px; right: 8px; }
+.section-butterfly--godparents { top: 88px; left: 12px; width: 38px; }
+.section-butterfly--schedule { top: 108px; right: 9px; width: 36px; }
+.section-butterfly--dresscode { top: 92px; right: 14px; width: 38px; }
+.section-butterfly--rsvp { top: 72px; left: 10px; width: 36px; }
+
+.is-visible .section-butterfly {
+  animation: corner-flutter 5.2s .4s ease-in-out infinite;
+}
+
+.is-visible .section-butterfly--reverse {
+  animation-name: corner-flutter-reverse;
+  animation-duration: 4.7s;
+}
+
 .months.is-visible .section-bow,
 .godparents.is-visible .section-bow,
 #event-schedule.is-visible .section-bow,
@@ -178,6 +203,20 @@ html { scroll-behavior: smooth; }
   0%, 100% { transform: rotate(0) scale(1); }
   30% { transform: rotate(-8deg) scale(1.08); }
   65% { transform: rotate(8deg) scale(.98); }
+}
+
+@keyframes corner-flutter {
+  0%, 100% { transform: translate(0, 0) rotate(-5deg) scale(1); }
+  24% { transform: translate(7px, -7px) rotate(4deg) scale(.95); }
+  52% { transform: translate(2px, -13px) rotate(-2deg) scale(1.04); }
+  76% { transform: translate(-5px, -6px) rotate(6deg) scale(.98); }
+}
+
+@keyframes corner-flutter-reverse {
+  0%, 100% { transform: translate(0, 0) rotate(5deg) scaleX(-1); }
+  28% { transform: translate(-7px, -8px) rotate(-4deg) scaleX(-.96); }
+  58% { transform: translate(-1px, -13px) rotate(3deg) scaleX(-1.04); }
+  80% { transform: translate(5px, -5px) rotate(-6deg) scaleX(-.98); }
 }
 
 @keyframes bow-bob {
