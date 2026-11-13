@@ -17,6 +17,13 @@ body {
   font-family: Georgia, "Times New Roman", serif;
 }
 
+.page-shell {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.desktop-panel { display: none; }
+
 .main-section {
    background-image: url("assets/Group 3036.svg");
 }
@@ -496,6 +503,165 @@ section {
 .asset-button { display: block; border-radius: 999px; transition: transform .2s ease; }
 .asset-button:hover { transform: translateY(-2px); }
 .asset-button:focus-visible { outline: 3px solid #c98591; outline-offset: 3px; }
+
+@media (min-width: 820px) {
+  .page-shell.desktop-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 280px) 390px minmax(180px, 280px);
+    align-items: start;
+    justify-content: center;
+    gap: clamp(16px, 3vw, 32px);
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    padding: 36px clamp(12px, 3vw, 40px) 72px;
+  }
+
+  .desktop-layout .invitation {
+    grid-column: 2;
+    width: 390px;
+    margin: 0;
+    border-radius: 28px;
+  }
+
+  .desktop-layout .desktop-panel {
+    position: sticky;
+    top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    padding: clamp(22px, 2.5vw, 34px) clamp(16px, 2vw, 26px);
+    overflow: hidden;
+    border: 1px solid rgba(193, 148, 133, .18);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 10% 5%, rgba(239, 158, 172, .16), transparent 26%),
+      radial-gradient(circle at 90% 92%, rgba(154, 126, 188, .13), transparent 28%),
+      rgba(255, 253, 251, .93);
+    box-shadow: 0 18px 48px rgba(88, 61, 48, .11);
+    text-align: center;
+  }
+
+  .desktop-panel-bow {
+    width: min(150px, 90%);
+    height: auto;
+    margin-bottom: 12px;
+  }
+
+  .desktop-kicker {
+    margin: 0 0 18px;
+    color: #a17f68;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.3px;
+    text-transform: uppercase;
+  }
+
+  .desktop-panel-name {
+    width: min(235px, 100%);
+    height: auto;
+    margin-bottom: 14px;
+  }
+
+  .desktop-event {
+    margin: 0 0 24px;
+    color: #d58f9e;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .desktop-date {
+    display: grid;
+    gap: 7px;
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 18px 10px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, .78);
+    color: #a17f68;
+    font-size: 12px;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+  }
+
+  .desktop-primary-link,
+  .desktop-detail-block a {
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 999px;
+    background: #ed9eac;
+    box-shadow: 0 8px 16px rgba(178, 112, 124, .2);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .desktop-view-link {
+    margin-top: 16px;
+    color: #9b765f;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-underline-offset: 4px;
+  }
+
+  .desktop-countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    margin-bottom: 28px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .82);
+  }
+
+  .desktop-countdown > div {
+    display: grid;
+    gap: 5px;
+    padding: 14px 2px;
+  }
+
+  .desktop-countdown > div + div { border-left: 1px solid rgba(161, 127, 104, .13); }
+  .desktop-countdown strong { font-size: 16px; letter-spacing: 1px; }
+  .desktop-countdown span { font-size: 7px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; }
+
+  .desktop-detail-block {
+    display: grid;
+    gap: 7px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(161, 127, 104, .14);
+  }
+
+  .desktop-detail-block > span,
+  .desktop-colors > span {
+    color: #d58f9e;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .desktop-detail-block strong { font-size: 13px; line-height: 1.45; }
+  .desktop-detail-block small { margin-bottom: 5px; font-size: 10px; letter-spacing: 1px; }
+  .desktop-detail-block a { margin-top: 7px; padding: 10px 12px; font-size: 9px; }
+
+  .desktop-colors {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+    padding-top: 4px;
+  }
+
+  .desktop-colors > div { display: flex; justify-content: center; gap: 8px; }
+  .desktop-colors img { width: clamp(38px, 4vw, 52px); height: auto; }
+}
 
 @media (max-width: 389px) {
   .invitation {

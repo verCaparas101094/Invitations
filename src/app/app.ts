@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, signal } from '@angula
 import { FormsModule, NgForm } from '@angular/forms';
 
 type IntroPhase = 'playing' | 'white' | 'reveal' | 'done';
+type LayoutMode = 'mobile' | 'web';
 type CountdownValue = { days: string; hours: string; minutes: string; seconds: string };
 
 @Component({
@@ -15,6 +16,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   submitted = false;
   readonly introStarted = signal(false);
   readonly introPhase = signal<IntroPhase>('playing');
+  readonly layoutMode = signal<LayoutMode>('mobile');
   readonly countdown = signal<CountdownValue>({ days: '00', hours: '00', minutes: '00', seconds: '00' });
   private observer?: IntersectionObserver;
   private sections: HTMLElement[] = [];
@@ -23,7 +25,27 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private backgroundMusic?: HTMLAudioElement;
   private countdownTimer?: ReturnType<typeof setInterval>;
 
-  constructor(private readonly host: ElementRef<HTMLElement>) {}
+  constructor(private readonly host: ElementRef<HTMLElement>) {
+    this.configureLayoutRoute();
+  }
+
+  private configureLayoutRoute(): void {
+    const route = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+
+    if (route === '/mobile') {
+      this.layoutMode.set('mobile');
+      return;
+    }
+
+    if (route === '/web' || route === '/desktop') {
+      this.layoutMode.set('web');
+      return;
+    }
+
+    const mode: LayoutMode = window.innerWidth >= 820 ? 'web' : 'mobile';
+    this.layoutMode.set(mode);
+    window.history.replaceState(null, '', `/${mode}${window.location.search}${window.location.hash}`);
+  }
 
   ngAfterViewInit(): void {
     this.sections = Array.from(

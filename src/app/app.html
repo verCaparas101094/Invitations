@@ -20,6 +20,22 @@
   <img src="assets/Frame 2576.svg" alt="">
 </button>
 
+<div class="page-shell" [class.desktop-layout]="layoutMode() === 'web'"
+  [class.mobile-layout]="layoutMode() === 'mobile'">
+  <aside class="desktop-panel desktop-panel--intro" aria-label="Invitation summary">
+    <img class="desktop-panel-bow" src="assets/Group 3016.svg" alt="">
+    <p class="desktop-kicker">Join us as we celebrate</p>
+    <img class="desktop-panel-name" src="assets/Group 3023.svg" alt="Lara Shearra">
+    <p class="desktop-event">Baptism &amp; 1st Birthday</p>
+    <div class="desktop-date">
+      <strong>Sunday</strong>
+      <span>23 August 2026</span>
+      <span>10:00 AM</span>
+    </div>
+    <a class="desktop-primary-link" href="#rsvp">RSVP Now</a>
+    <a class="desktop-view-link" href="/mobile">Open mobile version</a>
+  </aside>
+
 <main class="invitation"
   [class.site-ready]="introPhase() === 'reveal' || introPhase() === 'done'">
   <div class="main-section">
@@ -179,3 +195,39 @@
     </section>
   </div>
 </main>
+
+  <aside class="desktop-panel desktop-panel--details" aria-label="Event details">
+    <p class="desktop-kicker">Until the celebration</p>
+    <div class="desktop-countdown" role="timer" aria-label="Countdown to February 14, 2027">
+      <div><strong>{{ countdown().days }}</strong><span>Days</span></div>
+      <div><strong>{{ countdown().hours }}</strong><span>Hours</span></div>
+      <div><strong>{{ countdown().minutes }}</strong><span>Mins.</span></div>
+      <div><strong>{{ countdown().seconds }}</strong><span>Secs.</span></div>
+    </div>
+
+    <div class="desktop-detail-block">
+      <span>Church</span>
+      <strong>St. Michael the Archangel Parish Church</strong>
+      <small>Calasiao, Pangasinan</small>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=St.%20Michael%20the%20Archangel%20Parish%20Church%2C%20Calasiao%2C%20Pangasinan"
+        target="_blank" rel="noopener noreferrer">View church map</a>
+    </div>
+
+    <div class="desktop-detail-block">
+      <span>Reception</span>
+      <strong>Jech's Bakeshop and Restaurant</strong>
+      <small>Calasiao, Pangasinan</small>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Jech%27s%20Bakeshop%20and%20Restaurant%2C%20Calasiao%2C%20Pangasinan"
+        target="_blank" rel="noopener noreferrer">View reception map</a>
+    </div>
+
+    <div class="desktop-colors" aria-label="Suggested dress colors">
+      <span>Light-color dress code</span>
+      <div>
+        <img src="assets/Ellipse 440.svg" alt="Light cream">
+        <img src="assets/Ellipse 441.svg" alt="Blush pink">
+        <img src="assets/Ellipse 442.svg" alt="Warm beige">
+      </div>
+    </div>
+  </aside>
+</div>
