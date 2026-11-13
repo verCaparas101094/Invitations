@@ -1,3 +1,5 @@
+@import "./src/web.css";
+
 :root {
   --page-width: 390px;
   --paper: #fffdfb;
