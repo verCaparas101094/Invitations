@@ -14,6 +14,86 @@
     (error)="skipIntro()" alt="Watercolour invitation envelope opening">
 </div>
 
+<div class="web-invitation" [class.is-active]="layoutMode() === 'web'">
+  <header class="web-header">
+    <a class="web-brand" href="#web-home"><strong>Lara Shearra</strong><small>Baptism &amp; 1st Birthday</small></a>
+    <nav aria-label="Desktop invitation navigation">
+      <a class="active" href="#web-home">Home</a><a href="#web-gallery">Gallery</a>
+      <a href="#web-details">Event details</a><a href="#web-rsvp">RSVP</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="web-hero web-floral" id="web-home">
+      <div class="web-hero-inner">
+        <img class="web-hero-photo" src="assets/Group 3021.svg" alt="Lara's first birthday portraits">
+        <div class="web-hero-copy">
+          <p class="web-eyebrow">Join us as we celebrate our</p>
+          <img class="web-little-butterfly" src="assets/Group 3019.svg" alt="Little Butterfly">
+          <img class="web-name" src="assets/Group 3023.svg" alt="Lara Shearra">
+          <img class="web-ribbon" src="assets/image-Photoroom (31) 1.svg" alt="Baptism and first birthday">
+          <img class="web-date" src="assets/SUNDAY 23rd of august 2026 at 10_00 am.svg" alt="Sunday, 23rd of August 2026 at 10:00 AM">
+          <a class="web-primary-button" href="#web-rsvp">RSVP now</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="web-gallery web-floral" id="web-gallery">
+      <div class="web-section-heading">
+        <img class="web-divider-bow" src="assets/Group 3016.svg" alt="">
+        <img class="web-gallery-title" src="assets/A Year of Little Wonders.svg" alt="A Year of Little Miracles">
+        <img class="web-gallery-subtitle" src="assets/12 Months of Growing Up.svg" alt="12 months of growing up">
+      </div>
+      <div class="web-month-grid" aria-label="Lara's first twelve months">
+        <div class="web-month-card month-1"><span>Newborn</span></div><div class="web-month-card month-2"><span>1 month</span></div>
+        <div class="web-month-card month-3"><span>2 months</span></div><div class="web-month-card month-4"><span>3 months</span></div>
+        <div class="web-month-card month-5"><span>4 months</span></div><div class="web-month-card month-6"><span>5 months</span></div>
+        <div class="web-month-card month-7"><span>6 months</span></div><div class="web-month-card month-8"><span>7 months</span></div>
+        <div class="web-month-card month-9"><span>8 months</span></div><div class="web-month-card month-10"><span>9 months</span></div>
+        <div class="web-month-card month-11"><span>10 months</span></div><div class="web-month-card month-12"><span>12 months</span></div>
+      </div>
+    </section>
+
+    <section class="web-godparents web-floral">
+      <div class="web-section-heading compact">
+        <img class="web-divider-bow" src="assets/Group 3016.svg" alt=""><img class="web-godparents-title" src="assets/Godparents.svg" alt="Godparents">
+        <p>The hearts who will guide Lara Shearra in life and faith</p>
+      </div>
+      <div class="web-godparent-columns">
+        <div><strong>Aethan Nacionales</strong><strong>Louis Ferrer</strong><strong>Karl Lester Oscan</strong><strong>Lynyrd Antipuesto Coronel</strong><strong>Mark Joriel Fernandez</strong><strong>Gerald Queyquep</strong></div>
+        <div><strong>Rio de Guzman</strong><strong>Erly Nacionales</strong><strong>Sydney Mamaril</strong><strong>Armie Cardozo</strong><strong>Noreine Venice Pasaoa</strong><strong>Fatima Grace Frando</strong><strong>Kristine Avelino</strong><strong>Joana Marie Deleon</strong><strong>Ambra Thalia Andaya</strong></div>
+      </div>
+    </section>
+
+    <section class="web-event-details web-floral" id="web-details">
+      <h2>Event Details</h2>
+      <div class="web-event-cards">
+        <article class="web-event-card"><span class="web-event-icon">&#128197;</span><img src="assets/Date &amp; Time.svg" alt="Date and Time"><small>A little day, a big celebration<br>Save the date!</small><img class="web-event-info" src="assets/Frame 2579.svg" alt="Sunday, 23rd of August 2026 at 10:00 AM"></article>
+        <article class="web-event-card"><span class="web-event-icon">&#9962;</span><img src="assets/Church.svg" alt="Church"><small>St. Michael the Archangel Parish Church,<br>Calasiao, Pangasinan</small><a class="web-card-button" href="https://www.google.com/maps/search/?api=1&amp;query=St.%20Michael%20the%20Archangel%20Parish%20Church%2C%20Calasiao%2C%20Pangasinan" target="_blank" rel="noopener noreferrer">Church map &rarr;</a></article>
+        <article class="web-event-card"><span class="web-event-icon">&#128276;</span><img src="assets/Reception.svg" alt="Reception"><small>Jech's Bakeshop and Restaurant,<br>Calasiao, Pangasinan</small><a class="web-card-button" href="https://www.google.com/maps/search/?api=1&amp;query=Jech%27s%20Bakeshop%20and%20Restaurant%2C%20Calasiao%2C%20Pangasinan" target="_blank" rel="noopener noreferrer">Reception map &rarr;</a></article>
+      </div>
+      <div class="web-dresscode"><h2>Dresscode</h2><div class="web-swatches"><img src="assets/Ellipse 440.svg" alt="Light cream"><img src="assets/Ellipse 441.svg" alt="Warm beige"><img src="assets/Ellipse 442.svg" alt="Blush pink"></div><p>We kindly ask you to consider wearing light colors.</p></div>
+      <div class="web-countdown-title">And we can't wait to celebrate with you!</div>
+      <div class="web-countdown" role="timer" aria-label="Countdown to February 14, 2027">
+        <div><strong>{{ countdown().days }}</strong><span>Days</span></div><div><strong>{{ countdown().hours }}</strong><span>Hours</span></div><div><strong>{{ countdown().minutes }}</strong><span>Minutes</span></div><div><strong>{{ countdown().seconds }}</strong><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <section class="web-rsvp-section web-floral" id="web-rsvp">
+      <div class="web-rsvp-inner">
+        <div class="web-rsvp-art"><img class="web-rsvp-baby" src="assets/transparent-Photoroom (11) 2.svg" alt="Lara"><img src="assets/Group 3035.svg" alt="RSVP by August 2, 2026"><p>I can't wait to celebrate with you!</p></div>
+        <form class="web-rsvp-form" #webRsvpForm="ngForm" (ngSubmit)="submitRsvp(webRsvpForm)">
+          <label><span>Your name*</span><input type="text" name="webName" autocomplete="name" ngModel required></label>
+          <label><span>Are you coming?*</span><select name="webAttendance" ngModel required><option value="" disabled>Select your response</option><option value="yes">Yes, I'll be there!</option><option value="no">Can't make it this time.</option></select></label>
+          <label><span>Mobile number*</span><input type="tel" name="webMobile" autocomplete="tel" inputmode="tel" ngModel required></label>
+          <p>Please share your phone number so we can reach out with updates if needed.</p><button type="submit">{{ submitted ? 'Thank you!' : 'Submit' }}</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="web-footer"><a href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank" rel="noopener noreferrer"><img src="assets/Group 3034.svg" alt="Prints by K Designs"></a><span>&#9993; @printsbykdesigns.ph</span><a class="web-footer-button" href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank" rel="noopener noreferrer">Visit our page &rarr;</a></footer>
+</div>
+
 <button class="music" type="button" aria-label="Toggle invitation music"
   [attr.aria-pressed]="musicOn" [class.is-playing]="musicOn"
   [class.is-visible]="introPhase() === 'reveal' || introPhase() === 'done'" (click)="toggleMusic()">

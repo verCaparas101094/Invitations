@@ -24,7 +24,8 @@
             ],
             "styles": [
               "styles.css",
-              "src/animations.css"
+              "src/animations.css",
+              "src/web.css"
             ]
           },
           "configurations": {
