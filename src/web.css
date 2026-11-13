@@ -40,7 +40,26 @@
 }
 .web-invitation main::before { left: 0; }
 .web-invitation main::after { right: 0; transform: scaleX(-1); }
+.web-invitation main::before,
+.web-invitation main::after { animation: web-floral-breathe 9s ease-in-out infinite; }
 .web-invitation main > section { position: relative; z-index: 1; }
+
+.web-butterfly {
+  position: absolute;
+  z-index: 3;
+  width: 54px;
+  height: auto;
+  opacity: .62;
+  pointer-events: none;
+  transform-origin: center;
+  filter: drop-shadow(0 5px 7px rgba(139, 92, 119, .14));
+}
+.web-butterfly--hero { top: 105px; right: 9%; width: 58px; transform: rotate(12deg); animation: web-butterfly-float 6.8s .3s ease-in-out infinite; }
+.web-butterfly--gallery-left { top: 74px; left: 13%; width: 46px; transform: rotate(-15deg); animation: web-butterfly-float-reverse 7.6s .8s ease-in-out infinite; }
+.web-butterfly--gallery-right { top: 92px; right: 13%; width: 50px; transform: rotate(18deg); animation: web-butterfly-float 8.1s 1.2s ease-in-out infinite; }
+.web-butterfly--countdown-left { right: calc(50% + 340px); bottom: 75px; width: 48px; transform: rotate(-20deg); animation: web-butterfly-float-reverse 7.2s .2s ease-in-out infinite; }
+.web-butterfly--countdown-right { left: calc(50% + 340px); bottom: 82px; width: 44px; transform: rotate(16deg); animation: web-butterfly-float 6.4s 1s ease-in-out infinite; }
+.web-butterfly--rsvp { top: 52px; right: 9%; width: 47px; transform: rotate(13deg); animation: web-butterfly-float-reverse 7.9s .6s ease-in-out infinite; }
 
 .web-header {
   position: sticky;
@@ -113,7 +132,16 @@
   letter-spacing: 4px;
   text-decoration: none;
   text-transform: uppercase;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
 }
+.web-primary-button:hover,
+.web-card-button:hover,
+.web-rsvp-form button:hover,
+.web-footer-button:hover { transform: translateY(-2px); box-shadow: 0 11px 20px rgba(205, 111, 132, .28); filter: saturate(1.04); }
+.web-primary-button:focus-visible,
+.web-card-button:focus-visible,
+.web-rsvp-form button:focus-visible,
+.web-footer-button:focus-visible { outline: 3px solid rgba(211, 118, 141, .55); outline-offset: 3px; }
 .web-primary-button { width: 220px; min-height: 48px; }
 
 .web-gallery { padding: 0 max(115px, calc((100vw - 1180px) / 2)) 32px; }
@@ -131,7 +159,9 @@
   background-repeat: no-repeat;
   background-size: 405.8% auto;
   box-shadow: 0 8px 18px rgba(119, 79, 62, .1);
+  transition: transform .28s ease, box-shadow .28s ease;
 }
+.web-month-card:hover { transform: translateY(-4px); box-shadow: 0 13px 24px rgba(119, 79, 62, .15); }
 .web-month-card span { display: none; }
 .month-1 { background-position: 15% 9%; }.month-2 { background-position: 48% 9%; }.month-3 { background-position: 81% 9%; }
 .month-4 { background-position: 15% 38.5%; }.month-5 { background-position: 48% 38.5%; }.month-6 { background-position: 81% 38.5%; }
@@ -165,16 +195,45 @@
 .web-dresscode h2 { margin: 0; }
 .web-dresscode p { padding-left: 32px; border-left: 1px solid var(--web-pink); font-size: 11px; font-weight: 700; line-height: 1.7; letter-spacing: 2px; text-transform: uppercase; }
 .web-swatches { display: flex; gap: 12px; }.web-swatches img { width: 54px; height: 54px; }
-.web-countdown-title { width: min(620px, 80%); margin: auto; padding: 8px; color: #fff; background: var(--web-pink); clip-path: polygon(0 8%, 5% 17%, 4% 0, 96% 0, 95% 17%, 100% 8%, 96% 92%, 95% 75%, 5% 75%, 4% 92%); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-align: center; text-transform: uppercase; }
-.web-countdown { display: grid; grid-template-columns: repeat(4, 118px); justify-content: center; gap: 22px; margin-top: 2px; }
-.web-countdown div { display: grid; place-items: center; width: 118px; height: 92px; border: 3px solid rgba(231, 149, 165, .35); border-radius: 40% 55% 42% 52%; background: rgba(255,255,255,.8); }
-.web-countdown strong { color: #86634e; font-size: 30px; letter-spacing: 3px; }.web-countdown span { margin-top: -18px; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+.web-countdown-title {
+  position: relative;
+  z-index: 2;
+  width: min(560px, 72%);
+  margin: 0 auto 9px;
+  padding: 10px 42px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 4px;
+  color: #fff;
+  background: linear-gradient(180deg, #f1a5b5 0%, #e9879d 48%, #df7893 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 7px 14px rgba(190,104,126,.18);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.7px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.web-countdown-title::before,
+.web-countdown-title::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 6px;
+  width: 48px;
+  height: 30px;
+  background: linear-gradient(180deg, #e992a7, #d9748e);
+  filter: drop-shadow(0 4px 4px rgba(160,83,105,.13));
+}
+.web-countdown-title::before { left: -34px; clip-path: polygon(0 0, 100% 0, 82% 50%, 100% 100%, 0 100%, 17% 50%); }
+.web-countdown-title::after { right: -34px; clip-path: polygon(0 0, 100% 0, 83% 50%, 100% 100%, 0 100%, 18% 50%); transform: scaleX(-1); }
+.web-countdown { display: grid; grid-template-columns: repeat(4, 106px); justify-content: center; gap: 24px; margin-top: 2px; }
+.web-countdown div { display: grid; place-items: center; align-content: center; gap: 12px; width: 106px; height: 106px; border: 2px solid rgba(229, 143, 162, .46); border-radius: 50%; background: radial-gradient(circle at 38% 28%, #fff 0%, #fffaf8 58%, #fbecef 100%); box-shadow: inset 0 0 0 5px rgba(255,255,255,.62), 0 8px 16px rgba(183,112,129,.12); }
+.web-countdown strong { color: #86634e; font-size: 29px; line-height: 1; letter-spacing: 3px; transition: opacity .2s ease, transform .2s ease; }.web-countdown span { font-size: 9px; line-height: 1; font-weight: 700; letter-spacing: 2.7px; text-transform: uppercase; }
 
 .web-rsvp-section { padding: 22px max(120px, calc((100vw - 1080px) / 2)) 36px; }
 .web-rsvp-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; width: min(1080px, 100%); margin: auto; }
 .web-rsvp-art { position: relative; display: grid; align-content: center; min-height: 330px; padding-left: 205px; text-align: center; }
 .web-rsvp-baby { position: absolute; bottom: 0; left: 0; width: 225px; }
-.web-rsvp-art .web-rsvp-bow { width: 250px; height: 34px; margin: 0 auto -5px; object-fit: cover; object-position: center; }
+.web-rsvp-art .web-rsvp-bow { width: 270px; height: 42px; margin: 0 auto -8px; object-fit: contain; object-position: center; filter: drop-shadow(0 6px 7px rgba(181,105,126,.16)) saturate(1.05); }
 .web-rsvp-art h2 { margin: 0; color: var(--web-pink); font: italic 58px/.95 "Times New Roman", serif; }
 .web-rsvp-art .web-rsvp-deadline { width: 188px; margin: 18px auto; }
 .web-rsvp-art .web-rsvp-message { width: 245px; margin: 0 auto; }
@@ -183,9 +242,46 @@
 .web-rsvp-form label span { font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
 .web-rsvp-form input, .web-rsvp-form select { width: 100%; height: 48px; padding: 0 15px; border: 1px solid #cba28f; border-radius: 9px; color: #6f5548; background: #fff; font: 14px Georgia, "Times New Roman", serif; }
 .web-rsvp-form p { margin: 0; font-size: 11px; line-height: 1.45; letter-spacing: 1.2px; text-align: center; }.web-rsvp-form button { min-height: 44px; cursor: pointer; }
-.web-footer { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; width: min(1240px, calc(100% - 80px)); min-height: 126px; margin: 0 auto 28px; padding: 8px 60px; border-radius: 28px; background: #fff2ef; }
-.web-footer > a:first-child { display: grid; place-items: center; width: 190px; height: 112px; overflow: hidden; }
-.web-footer > a:first-child img { width: 205px; height: 122px; object-fit: contain; transform: scale(1.18); }.web-footer span { color: var(--web-pink); font-size: 13px; font-weight: 700; text-align: center; }.web-footer-button { min-height: 40px; font-size: 11px; }
+.web-footer { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; width: min(1240px, calc(100% - 80px)); min-height: 142px; margin: 0 auto 28px; padding: 7px 60px; border-radius: 28px; background: #fff2ef; }
+.web-footer > a:first-child { display: grid; place-items: center; width: 190px; height: 128px; justify-self: start; }
+.web-footer > a:first-child img { width: 140px; height: 127px; object-fit: contain; }.web-footer span { color: var(--web-pink); font-size: 13px; font-weight: 700; text-align: center; }.web-footer-button { min-height: 40px; font-size: 11px; }
+
+.web-gallery.is-visible .web-section-heading,
+.web-godparents.is-visible .web-section-heading,
+.web-event-details.is-visible > h2,
+.web-event-details.is-visible .web-event-cards,
+.web-event-details.is-visible .web-dresscode,
+.web-event-details.is-visible .web-countdown,
+.web-rsvp-section.is-visible .web-rsvp-inner { animation: web-soft-rise .78s cubic-bezier(.2,.8,.2,1) both; }
+.web-event-details.is-visible .web-event-cards { animation-delay: .08s; }
+.web-event-details.is-visible .web-dresscode { animation-delay: .16s; }
+.web-event-details.is-visible .web-countdown-title { animation: web-ribbon-arrival .72s .24s cubic-bezier(.2,.85,.25,1.1) both; }
+.web-event-details.is-visible .web-countdown { animation-delay: .3s; }
+.web-rsvp-section.is-visible .web-rsvp-bow { animation: web-ribbon-arrival .72s .14s cubic-bezier(.2,.85,.25,1.1) both; }
+.web-rsvp-section.is-visible .web-rsvp-inner { animation-delay: .06s; }
+
+@keyframes web-soft-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes web-ribbon-arrival {
+  from { opacity: 0; transform: translateY(10px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes web-butterfly-float {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  45% { translate: 7px -9px; rotate: 5deg; }
+  72% { translate: -3px -5px; rotate: -3deg; }
+}
+@keyframes web-butterfly-float-reverse {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  38% { translate: -6px -10px; rotate: -5deg; }
+  76% { translate: 4px -4px; rotate: 4deg; }
+}
+@keyframes web-floral-breathe {
+  0%, 100% { opacity: .92; translate: 0 0; }
+  50% { opacity: 1; translate: 0 -2px; }
+}
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .web-invitation.is-active { min-width: 760px; }
@@ -197,8 +293,29 @@
   .web-event-cards { gap: 12px; }.web-event-card { padding-inline: 12px; }.web-event-card small { font-size: 11px; }
   .web-rsvp-section { padding-inline: 70px; }.web-rsvp-inner { gap: 24px; }.web-rsvp-art { padding-left: 135px; }.web-rsvp-baby { width: 185px; }
   .web-rsvp-form { padding: 25px 24px; }.web-rsvp-form label { grid-template-columns: 125px 1fr; }
+  .web-butterfly--countdown-left { right: calc(50% + 275px); }.web-butterfly--countdown-right { left: calc(50% + 275px); }
 }
 
 @media (max-width: 767px) {
   .web-invitation { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .web-butterfly,
+  .web-invitation main::before,
+  .web-invitation main::after,
+  .web-gallery.is-visible .web-section-heading,
+  .web-godparents.is-visible .web-section-heading,
+  .web-event-details.is-visible > h2,
+  .web-event-details.is-visible .web-event-cards,
+  .web-event-details.is-visible .web-dresscode,
+  .web-event-details.is-visible .web-countdown-title,
+  .web-event-details.is-visible .web-countdown,
+  .web-rsvp-section.is-visible .web-rsvp-inner,
+  .web-rsvp-section.is-visible .web-rsvp-bow { animation: none !important; transition: none !important; }
+  .web-month-card:hover,
+  .web-primary-button:hover,
+  .web-card-button:hover,
+  .web-rsvp-form button:hover,
+  .web-footer-button:hover { transform: none; }
 }
