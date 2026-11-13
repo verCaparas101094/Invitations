@@ -14,14 +14,15 @@
     (error)="skipIntro()" alt="Watercolour invitation envelope opening">
 </div>
 
+<button class="music" type="button" aria-label="Toggle invitation music"
+  [attr.aria-pressed]="musicOn" [class.is-playing]="musicOn"
+  [class.is-visible]="introPhase() === 'reveal' || introPhase() === 'done'" (click)="toggleMusic()">
+  <img src="assets/Frame 2576.svg" alt="">
+</button>
+
 <main class="invitation"
   [class.site-ready]="introPhase() === 'reveal' || introPhase() === 'done'">
   <div class="main-section">
-    <button class="music" type="button" aria-label="Toggle invitation music animation"
-      [attr.aria-pressed]="musicOn" [class.is-playing]="musicOn" (click)="toggleMusic()">
-      <img src="assets/Frame 2576.svg" alt="">
-    </button>
-
     <section class="hero decorated decorated--tall animate-section">
       <img class="eyebrow" src="assets/JOIN US AS WE CELEBRATE OUR.svg" alt="Join us as we celebrate our">
       <img class="little-butterfly" src="assets/Group 3019.svg" alt="Little Butterfly">
