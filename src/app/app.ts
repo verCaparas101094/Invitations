@@ -22,8 +22,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private sections: HTMLElement[] = [];
   private sectionAnimationsStarted = false;
   private readonly introTimers: Array<ReturnType<typeof setTimeout>> = [];
-  private audioContext?: AudioContext;
-  private musicTimer?: ReturnType<typeof setInterval>;
+  private backgroundMusic?: HTMLAudioElement;
   private countdownTimer?: ReturnType<typeof setInterval>;
 
   constructor(private readonly host: ElementRef<HTMLElement>) {}
@@ -61,7 +60,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     video.muted = true;
     this.introStarted.set(true);
-    void this.prepareBaptismAudio();
+    this.prepareBackgroundMusic();
     void video.play()
       .then(() => this.scheduleIntroFallback(video))
       .catch(() => {
@@ -152,33 +151,22 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.musicOn = !this.musicOn;
 
     if (this.musicOn) {
-      void this.startBaptismMusic();
+      this.playBackgroundMusic();
     } else {
-      this.stopBaptismMusic();
+      this.backgroundMusic?.pause();
     }
   }
 
-  private async startBaptismMusic(): Promise<void> {
-    await this.prepareBaptismAudio();
-    if (!this.musicOn || !this.audioContext) {
-      return;
+  private prepareBackgroundMusic(): void {
+    if (!this.backgroundMusic) {
+      this.backgroundMusic = new Audio('assets/bgmusic.mp3');
+      this.backgroundMusic.loop = true;
+      this.backgroundMusic.preload = 'auto';
+      this.backgroundMusic.volume = 0.55;
     }
 
-    this.playBaptismChimes();
-    this.musicTimer = setInterval(() => this.playBaptismChimes(), 7600);
-  }
-
-  private async prepareBaptismAudio(): Promise<void> {
-    const AudioContextClass = window.AudioContext ??
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-
-    if (!AudioContextClass) {
-      this.musicOn = false;
-      return;
-    }
-
-    this.audioContext ??= new AudioContextClass();
-    await this.audioContext.resume();
+    this.backgroundMusic.muted = true;
+    void this.backgroundMusic.play().catch(() => undefined);
   }
 
   private startMusicAfterOpening(): void {
@@ -187,45 +175,27 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
 
     this.musicOn = true;
-    void this.startBaptismMusic();
+    this.playBackgroundMusic(true);
   }
 
-  private playBaptismChimes(): void {
-    const context = this.audioContext;
-    if (!context || context.state === 'closed') {
+  private playBackgroundMusic(restart = false): void {
+    if (!this.backgroundMusic) {
+      this.prepareBackgroundMusic();
+    }
+
+    const audio = this.backgroundMusic;
+    if (!audio) {
+      this.musicOn = false;
       return;
     }
 
-    const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 783.99, 1046.5];
-    const startAt = context.currentTime + 0.05;
-
-    melody.forEach((frequency, index) => {
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      const noteStart = startAt + index * 0.72;
-      const noteEnd = noteStart + 1.8;
-
-      oscillator.type = index % 2 === 0 ? 'sine' : 'triangle';
-      oscillator.frequency.setValueAtTime(frequency, noteStart);
-      gain.gain.setValueAtTime(0.0001, noteStart);
-      gain.gain.exponentialRampToValueAtTime(0.035, noteStart + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0001, noteEnd);
-      oscillator.connect(gain).connect(context.destination);
-      oscillator.start(noteStart);
-      oscillator.stop(noteEnd);
+    if (restart) {
+      audio.currentTime = 0;
+    }
+    audio.muted = false;
+    void audio.play().catch(() => {
+      this.musicOn = false;
     });
-  }
-
-  private stopBaptismMusic(): void {
-    if (this.musicTimer) {
-      clearInterval(this.musicTimer);
-      this.musicTimer = undefined;
-    }
-
-    if (this.audioContext && this.audioContext.state !== 'closed') {
-      void this.audioContext.close();
-    }
-    this.audioContext = undefined;
   }
 
   submitRsvp(form: NgForm): void {
@@ -240,7 +210,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.observer?.disconnect();
     this.introTimers.forEach((timer) => clearTimeout(timer));
-    this.stopBaptismMusic();
+    this.backgroundMusic?.pause();
+    this.backgroundMusic = undefined;
     if (this.countdownTimer) {
       clearInterval(this.countdownTimer);
     }
