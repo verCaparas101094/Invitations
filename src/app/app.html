@@ -81,7 +81,13 @@
 
     <section class="web-rsvp-section web-floral" id="web-rsvp">
       <div class="web-rsvp-inner">
-        <div class="web-rsvp-art"><img class="web-rsvp-baby" src="assets/transparent-Photoroom (11) 2.svg" alt="Lara"><img src="assets/Group 3035.svg" alt="RSVP by August 2, 2026"><p>I can't wait to celebrate with you!</p></div>
+        <div class="web-rsvp-art">
+          <img class="web-rsvp-baby" src="assets/transparent-Photoroom (11) 2.svg" alt="Lara">
+          <img class="web-rsvp-bow" src="assets/Group 3016.svg" alt="">
+          <h2>RSVP</h2>
+          <img class="web-rsvp-deadline" src="assets/RSVP by august 2, 2026.svg" alt="Please RSVP by August 2, 2026">
+          <img class="web-rsvp-message" src="assets/Can’t wait to celebrate with you po!.svg" alt="Can't wait to celebrate with you">
+        </div>
         <form class="web-rsvp-form" #webRsvpForm="ngForm" (ngSubmit)="submitRsvp(webRsvpForm)">
           <label><span>Your name*</span><input type="text" name="webName" autocomplete="name" ngModel required></label>
           <label><span>Are you coming?*</span><select name="webAttendance" ngModel required><option value="" disabled>Select your response</option><option value="yes">Yes, I'll be there!</option><option value="no">Can't make it this time.</option></select></label>

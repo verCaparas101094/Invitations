@@ -42,7 +42,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const mode: LayoutMode = window.innerWidth >= 820 ? 'web' : 'mobile';
+    const mode: LayoutMode = window.innerWidth >= 768 ? 'web' : 'mobile';
     this.layoutMode.set(mode);
     window.history.replaceState(null, '', `/${mode}${window.location.search}${window.location.hash}`);
   }
