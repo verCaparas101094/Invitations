@@ -28,7 +28,7 @@ html { scroll-behavior: smooth; }
   width: min(100vw, 390px);
   height: auto;
   max-height: 100dvh;
-  aspect-ratio: 704 / 1248;
+  aspect-ratio: 354 / 478;
   object-fit: contain;
   background: #fff;
   opacity: 1;

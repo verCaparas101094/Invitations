@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 type IntroPhase = 'playing' | 'white' | 'reveal' | 'done';
@@ -11,8 +11,6 @@ type CountdownValue = { days: string; hours: string; minutes: string; seconds: s
   templateUrl: './app.html'
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('introVideo') private introVideo?: ElementRef<HTMLVideoElement>;
-
   musicOn = false;
   submitted = false;
   readonly introStarted = signal(false);
@@ -53,40 +51,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   playIntro(): void {
-    const video = this.introVideo?.nativeElement;
-    if (!video || this.introStarted()) {
+    if (this.introStarted()) {
       return;
     }
 
-    video.muted = true;
     this.introStarted.set(true);
     this.prepareBackgroundMusic();
-    void video.play()
-      .then(() => this.scheduleIntroFallback(video))
-      .catch(() => {
-        this.introStarted.set(false);
-      });
-  }
-
-  trackIntroProgress(event: Event): void {
-    const video = event.currentTarget as HTMLVideoElement;
-    if (
-      this.introPhase() === 'playing' &&
-      Number.isFinite(video.duration) &&
-      video.duration > 0 &&
-      video.duration - video.currentTime <= 0.35
-    ) {
-      this.finishIntro();
-    }
-  }
-
-  private scheduleIntroFallback(video: HTMLVideoElement): void {
-    if (!Number.isFinite(video.duration) || video.duration <= 0) {
-      return;
-    }
-
-    const remainingMilliseconds = Math.max(0, video.duration - video.currentTime) * 1000;
-    this.introTimers.push(setTimeout(() => this.finishIntro(), remainingMilliseconds + 900));
+    this.introTimers.push(setTimeout(() => this.finishIntro(), 2250));
   }
 
   finishIntro(): void {
@@ -137,7 +108,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            this.observer?.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove('is-visible');
           }
         });
       },

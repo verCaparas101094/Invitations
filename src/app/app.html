@@ -9,11 +9,9 @@
   (click)="playIntro()"
   (keydown.enter)="playIntro()"
   (keydown.space)="playIntro(); $event.preventDefault()">
-  <video #introVideo class="intro-video" muted playsinline preload="auto" poster="assets/opening-poster.jpg"
-    (timeupdate)="trackIntroProgress($event)" (ended)="finishIntro()" (error)="skipIntro()"
-    aria-label="Invitation opening video">
-    <source src="assets/opening.mp4" type="video/mp4">
-  </video>
+  <img class="intro-video"
+    [src]="introStarted() ? 'assets/Watercolour Invitation Envelope Animation.gif' : 'assets/watercolour-envelope-poster.png'"
+    (error)="skipIntro()" alt="Watercolour invitation envelope opening">
 </div>
 
 <main class="invitation"
