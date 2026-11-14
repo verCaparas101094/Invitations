@@ -164,10 +164,10 @@
 }
 .web-month-card:hover { transform: translateY(-4px); box-shadow: 0 13px 24px rgba(119, 79, 62, .15); }
 .web-month-card span { display: none; }
-.month-1 { background-position: 15% 9%; }.month-2 { background-position: 48% 9%; }.month-3 { background-position: 81% 9%; }
-.month-4 { background-position: 15% 38.5%; }.month-5 { background-position: 48% 38.5%; }.month-6 { background-position: 81% 38.5%; }
-.month-7 { background-position: 15% 68%; }.month-8 { background-position: 48% 68%; }.month-9 { background-position: 81% 68%; }
-.month-10 { background-position: 15% 98%; }.month-11 { background-position: 48% 98%; }.month-12 { background-position: 81% 98%; }
+.month-1 { background-position: 14.75% 10.6%; }.month-2 { background-position: 47.5% 10.6%; }.month-3 { background-position: 80% 10.85%; }
+.month-4 { background-position: 15% 40%; }.month-5 { background-position: 47.5% 40.5%; }.month-6 { background-position: 80% 40.5%; }
+.month-7 { background-position: 15% 70%; }.month-8 { background-position: 48% 70%; }.month-9 { background-position: 80.5% 70%; }
+.month-10 { background-position: 15% 99.5%; }.month-11 { background-position: 47.5% 99.5%; }.month-12 { background-position: 79.98% 99.5%; }
 
 .web-godparents { padding: 0 max(180px, calc((100vw - 900px) / 2)) 30px; }
 .web-section-heading.compact { margin-bottom: 16px; }
