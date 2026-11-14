@@ -35,6 +35,7 @@
   bottom: 0;
   width: clamp(125px, 14vw, 220px);
   background: url("../assets/Mask group-8.svg") top left / 100% auto repeat-y;
+  mix-blend-mode: multiply;
   opacity: .76;
   pointer-events: none;
 }
@@ -242,9 +243,9 @@
 .web-rsvp-form label span { font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
 .web-rsvp-form input, .web-rsvp-form select { width: 100%; height: 48px; padding: 0 15px; border: 1px solid #cba28f; border-radius: 9px; color: #6f5548; background: #fff; font: 14px Georgia, "Times New Roman", serif; }
 .web-rsvp-form p { margin: 0; font-size: 11px; line-height: 1.45; letter-spacing: 1.2px; text-align: center; }.web-rsvp-form button { min-height: 44px; cursor: pointer; }
-.web-footer { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; width: min(1240px, calc(100% - 80px)); min-height: 142px; margin: 0 auto 28px; padding: 7px 60px; border-radius: 28px; background: #fff2ef; }
-.web-footer > a:first-child { display: grid; place-items: center; width: 190px; height: 128px; justify-self: start; }
-.web-footer > a:first-child img { width: 140px; height: 127px; object-fit: contain; }.web-footer span { color: var(--web-pink); font-size: 13px; font-weight: 700; text-align: center; }.web-footer-button { min-height: 40px; font-size: 11px; }
+.web-footer { display: flex; align-items: center; justify-content: flex-end; width: min(1240px, calc(100% - 80px)); min-height: 136px; margin: 10px auto 28px; padding: 12px 60px; border-radius: 28px; background: #fff2ef; }
+.web-footer-qr { position: relative; display: block; width: 112px; height: 112px; overflow: hidden; }
+.web-footer-qr img { position: absolute; top: -50px; left: -107px; width: 326px; height: 295px; max-width: none; }
 
 .web-gallery.is-visible .web-section-heading,
 .web-godparents.is-visible .web-section-heading,

@@ -72,6 +72,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  scrollToSection(sectionId: string, event: MouseEvent): void {
+    event.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${sectionId}`);
+  }
+
   playIntro(): void {
     if (this.introStarted()) {
       return;

@@ -16,10 +16,10 @@
 
 <div class="web-invitation" [class.is-active]="layoutMode() === 'web'">
   <header class="web-header">
-    <a class="web-brand" href="#web-home"><strong>Lara Shearra</strong><small>Baptism &amp; 1st Birthday</small></a>
+    <a class="web-brand" href="#web-home" (click)="scrollToSection('web-home', $event)"><strong>Lara Shearra</strong><small>Baptism &amp; 1st Birthday</small></a>
     <nav aria-label="Desktop invitation navigation">
-      <a class="active" href="#web-home">Home</a><a href="#web-gallery">Gallery</a>
-      <a href="#web-details">Event details</a><a href="#web-rsvp">RSVP</a>
+      <a class="active" href="#web-home" (click)="scrollToSection('web-home', $event)">Home</a><a href="#web-gallery" (click)="scrollToSection('web-gallery', $event)">Gallery</a>
+      <a href="#web-details" (click)="scrollToSection('web-details', $event)">Event details</a><a href="#web-rsvp" (click)="scrollToSection('web-rsvp', $event)">RSVP</a>
     </nav>
   </header>
 
@@ -34,7 +34,7 @@
           <img class="web-name" src="assets/Group 3023.svg" alt="Lara Shearra">
           <img class="web-ribbon" src="assets/image-Photoroom (31) 1.svg" alt="Baptism and first birthday">
           <img class="web-date" src="assets/SUNDAY 23rd of august 2026 at 10_00 am.svg" alt="Sunday, 23rd of August 2026 at 10:00 AM">
-          <a class="web-primary-button" href="#web-rsvp">RSVP now</a>
+          <a class="web-primary-button" href="#web-rsvp" (click)="scrollToSection('web-rsvp', $event)">RSVP now</a>
         </div>
       </div>
     </section>
@@ -103,7 +103,12 @@
       </div>
     </section>
   </main>
-  <footer class="web-footer"><a href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank" rel="noopener noreferrer"><img src="assets/Group 3034.svg" alt="Prints by K Designs"></a><span>&#9993; @printsbykdesigns.ph</span><a class="web-footer-button" href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank" rel="noopener noreferrer">Visit our page &rarr;</a></footer>
+  <footer class="web-footer">
+    <a class="web-footer-qr" href="https://www.instagram.com/printsbykdesigns.ph/" target="_blank"
+      rel="noopener noreferrer" aria-label="Visit Prints by K Designs">
+      <img src="assets/Group 3034.svg" alt="">
+    </a>
+  </footer>
 </div>
 
 <button class="music" type="button" aria-label="Toggle invitation music"
