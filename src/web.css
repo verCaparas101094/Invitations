@@ -245,7 +245,7 @@
 .web-rsvp-form p { margin: 0; font-size: 11px; line-height: 1.45; letter-spacing: 1.2px; text-align: center; }.web-rsvp-form button { min-height: 44px; cursor: pointer; }
 .web-footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px; width: 100%; min-height: 136px; margin: 0; padding: 12px max(60px, calc((100vw - 1240px) / 2 + 60px)); background: #fff2ef; }
 .web-footer-button { justify-self: start; width: 260px; min-height: 42px; font-size: 11px; }
-.web-footer-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; color: var(--web-pink); font-size: 14px; font-weight: 700; letter-spacing: 1px; text-decoration: none; }
+.web-footer-link { display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #ff7b4d; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0; text-decoration: none; }
 .web-instagram-icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .web-footer-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 .web-footer-qr { position: relative; display: block; justify-self: end; width: 112px; height: 112px; overflow: hidden; }

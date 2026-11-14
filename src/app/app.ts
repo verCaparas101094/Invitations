@@ -24,9 +24,18 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private readonly introTimers: Array<ReturnType<typeof setTimeout>> = [];
   private backgroundMusic?: HTMLAudioElement;
   private countdownTimer?: ReturnType<typeof setInterval>;
+  private readonly handleMobileViewport = (): void => {
+    if (window.innerWidth >= 768 || this.layoutMode() === 'mobile') {
+      return;
+    }
+
+    this.layoutMode.set('mobile');
+    window.history.replaceState(null, '', `/mobile${window.location.search}${window.location.hash}`);
+  };
 
   constructor(private readonly host: ElementRef<HTMLElement>) {
     this.configureLayoutRoute();
+    window.addEventListener('resize', this.handleMobileViewport);
   }
 
   private configureLayoutRoute(): void {
@@ -208,6 +217,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    window.removeEventListener('resize', this.handleMobileViewport);
     this.observer?.disconnect();
     this.introTimers.forEach((timer) => clearTimeout(timer));
     this.backgroundMusic?.pause();
