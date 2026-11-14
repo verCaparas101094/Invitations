@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
-type IntroPhase = 'playing' | 'white' | 'reveal' | 'done';
 type LayoutMode = 'mobile' | 'web';
 type CountdownValue = { days: string; hours: string; minutes: string; seconds: string };
 
@@ -14,14 +13,11 @@ type CountdownValue = { days: string; hours: string; minutes: string; seconds: s
 export class AppComponent implements AfterViewInit, OnDestroy {
   musicOn = false;
   submitted = false;
-  readonly introStarted = signal(false);
-  readonly introPhase = signal<IntroPhase>('playing');
   readonly layoutMode = signal<LayoutMode>('mobile');
   readonly countdown = signal<CountdownValue>({ days: '00', hours: '00', minutes: '00', seconds: '00' });
   private observer?: IntersectionObserver;
   private sections: HTMLElement[] = [];
   private sectionAnimationsStarted = false;
-  private readonly introTimers: Array<ReturnType<typeof setTimeout>> = [];
   private backgroundMusic?: HTMLAudioElement;
   private countdownTimer?: ReturnType<typeof setInterval>;
   private readonly handleViewportChange = (): void => {
@@ -65,7 +61,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     this.updateCountdown();
     this.countdownTimer = setInterval(() => this.updateCountdown(), 1000);
-
+    this.startSectionAnimations();
   }
 
   private updateCountdown(): void {
@@ -87,47 +83,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     event.preventDefault();
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${sectionId}`);
-  }
-
-  playIntro(): void {
-    if (this.introStarted()) {
-      return;
-    }
-
-    this.introStarted.set(true);
-    this.prepareBackgroundMusic();
-    this.introTimers.push(setTimeout(() => this.finishIntro(), 2250));
-  }
-
-  finishIntro(): void {
-    if (this.introPhase() !== 'playing') {
-      return;
-    }
-
-    this.introPhase.set('white');
-    this.introTimers.push(
-      setTimeout(() => {
-        this.introPhase.set('reveal');
-        this.startMusicAfterOpening();
-        this.startSectionAnimations();
-      }, 650),
-      setTimeout(() => {
-        this.introPhase.set('done');
-      }, 1550)
-    );
-  }
-
-  skipIntro(): void {
-    if (this.introPhase() === 'done') {
-      return;
-    }
-
-    this.introPhase.set('reveal');
-    if (this.introStarted()) {
-      this.startMusicAfterOpening();
-    }
-    this.startSectionAnimations();
-    this.introTimers.push(setTimeout(() => this.introPhase.set('done'), 700));
   }
 
   private startSectionAnimations(): void {
@@ -180,15 +135,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     void this.backgroundMusic.play().catch(() => undefined);
   }
 
-  private startMusicAfterOpening(): void {
-    if (this.musicOn) {
-      return;
-    }
-
-    this.musicOn = true;
-    this.playBackgroundMusic(true);
-  }
-
   private playBackgroundMusic(restart = false): void {
     if (!this.backgroundMusic) {
       this.prepareBackgroundMusic();
@@ -221,7 +167,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     window.removeEventListener('resize', this.handleViewportChange);
     this.observer?.disconnect();
-    this.introTimers.forEach((timer) => clearTimeout(timer));
     this.backgroundMusic?.pause();
     this.backgroundMusic = undefined;
     if (this.countdownTimer) {
